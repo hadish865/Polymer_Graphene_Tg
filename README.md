@@ -9,9 +9,9 @@ Authors: Bardia Afsordeh, Hadi Shirali
 Journal: Computational Materials Science
 
 ## Contents
+train_models.py: Training and testing scripts for machine learning models
 data/: processed data used for model training
 descriptors/: Codes for generating molecular and interaction-based descriptors
-models/: Training and testing scripts for machine learning models
 results/: Prediction results
 
 ## Prerequisite
@@ -32,4 +32,4 @@ to run the descriptors test on windows from the main directory:
 python.exe descriptors\Descriptors_test.py
 
 to run the machine learning models test on windows from the main directory:
-python.exe models\train_models.py
+python.exe train_models.py
