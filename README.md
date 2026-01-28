@@ -16,9 +16,6 @@ This repository is intended to enable full reproducibility of the results presen
 - `descriptors/`  
   Python codes for generating molecular and interaction-based descriptors.
 
-- `models/`  
-  Scripts for training, validation, and testing of machine learning models.
-
 - `results/`  
   Output files containing prediction results and performance metrics.
 
@@ -42,10 +39,12 @@ From the root directory of the repository:
 python descriptors/Descriptors_test.py
 
 ### Machine learning model training and testing
+```bash
 python train_models.py
 
 ## Note
 -The datasets provided in this repository are the processed versions used directly in the machine learning workflows described in the manuscript.
+
 -All scripts were tested using standard Python environments. Minor adjustments may be required depending on the operating system and Python version.
 
 ## Reproducibility
