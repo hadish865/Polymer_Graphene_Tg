@@ -49,6 +49,3 @@ python train_models.py
 
 ## Reproducibility
 All numerical results, figures, and performance metrics reported in the associated article can be reproduced using the data and scripts provided in this repository.
-
-```bash
-python descriptors/Descriptors_test.py
