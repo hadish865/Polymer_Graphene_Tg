@@ -1,0 +1,70 @@
+# add comments like this using the '#' symbol
+# this file is used to add the bond lengths between atoms for future uses
+# the format is as follows:
+# smaller atomic number, bigger atomic number, bond order (1,2,3), bond length + radius of atom1 + radius of atom 2
+# H atomic radius: 0.25, C Atomic radius: 0.7, N Atomic radius: 0.65, O Atomic radius: 0.6, 
+# F Atomic radius: 0.5, Si Atomic radius: 1.1 ,Cl Atomic radius: 1, S Atomic radius: 1
+# for atoms that are part of aromatic rings add the atomic number as atomic_number*11 (for example bond between a carbon and nitrogen which are part of aromatic rings is shown as: 66,77,bond length)
+# the units for all the above atoms are Angstrom
+
+# single bonds
+# single hydrogen nitrogen bond
+1,7,1,1.91
+# single carbon carbon bond
+6,6,1,2.93
+# single carbon carbon (aromatic) bond
+6,66,1,2.91
+# single carbon nitrogen bond
+6,7,1,2.82
+# single nitrogen carbon (aromatic) bond
+7,66,1,2.82
+# single carbon oxygen bond
+6,8,1,2.731
+# single carbon (aromatic) oxygen bond
+8,66,1,2.72
+# single carbon flourine bond
+6,9,1,2.55
+# single carbon silicone bond
+6,14,1,3.66
+# single carbon sulfur bond
+6,16,1,3.52
+# single carbon chlorine bond
+6,17,1,3.48
+# single chlorine carbon (aromatic) bond 
+17,66,1,3.48
+#single oxygen silicon bond
+8,14,1,3.34
+#single oxygen sulfur bond
+8,16,1,3.09
+# single silicone carbon (aromatic) bond 
+14,66,1,3.67
+# single silicone chlorine bond
+14,17,1,4.82
+# single sulfur carbon (aromatic) bond 
+16,66,1,3.38
+# single sulfur carbon (aromatic) bond 
+16,66,1,3.38
+
+# double bonds
+# double carbon carbon bond
+6,6,2,2.71
+# double carbon oxygen bond
+6,8,2,2.53
+# double carbon sulfur bond
+6,16,2,3.25
+# double oxygen silicon bond
+8,14,2,3.18
+# double carbon sulfur bond
+6,16,2,3.25
+# double oxygen sulfur bond
+8,16,2,3.02
+
+# triple bonds
+# triple carbon nitrogen bond
+6,7,3,2.49
+
+# aromatic-aromatic bonds
+66,66,1,2.78
+66,77,1,2.69
+66,176,1,3.46
+77,88,1, 2.63
