@@ -39,7 +39,7 @@ From the root directory of the repository:
 python descriptors/Descriptors_test.py
 
 ### Machine learning model training and testing
-```bash
+
 python train_models.py
 
 ## Note
