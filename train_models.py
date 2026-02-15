@@ -65,7 +65,7 @@ def Optimized_payan_name_Tg_nano_composite():
     dataset = pkl.load(open("data/"+filename, "rb"))
 
     X_fields = ["graphene_w","CH","C=OH","OH","NH","B","BCH","hydrogen_bond","polarity"]
-    X = normalize(np.array(dataset[["P_T_K","graphene_w","CH","C=OH","OH","NH","B","BCH","hydrogen_bond","polarity"]]),'l2',axis=0)
+    X = normalize(np.array(dataset[["graphene_w","CH","C=OH","OH","NH","B","BCH","P_T_K","hydrogen_bond","polarity"]]),'l2',axis=0)
     Y = np.array(dataset[["nano_composite_Tg_(K)"]])
     TEST_SIZE = 0.15
     polymer_names_with_Tg = dataset.iloc[:,[1,6]]
@@ -334,3 +334,4 @@ def Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,result
 results = []
 
 Optimized_payan_name_Tg_nano_composite()
+
