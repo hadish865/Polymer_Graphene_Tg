@@ -13,65 +13,63 @@ import pickle as pkl
 
 def Optimized_payan_name_Tg_nano_composite():
     RF_GB_models = [
-              # random forest optimized results
-              RandomForestRegressor(n_estimators=100 , min_samples_split = 0.0001      ),
-              RandomForestRegressor(n_estimators=279 , min_samples_split =0.001163361  ),
-              RandomForestRegressor(n_estimators=286 , min_samples_split =0.0001       ),
-              RandomForestRegressor(n_estimators=253 , min_samples_split =0.004159876  ),
-              RandomForestRegressor(n_estimators=306 , min_samples_split = 0.032556165 ),
-              # gradient boosting optimized results
-              GradientBoostingRegressor(n_estimators=263, min_samples_split=0.0001     ),
-              GradientBoostingRegressor(n_estimators=168, min_samples_split=0.078374433),
-              GradientBoostingRegressor(n_estimators=168, min_samples_split=0.057299572),
-              GradientBoostingRegressor(n_estimators=164, min_samples_split=0.003832128),
-              GradientBoostingRegressor(n_estimators=175, min_samples_split=0.223939066)
+              RandomForestRegressor(n_estimators = 217, min_samples_split = 0.093840625),
+              RandomForestRegressor(n_estimators = 272, min_samples_split = 0.031227635),
+              RandomForestRegressor(n_estimators = 350, min_samples_split = 0.039243403),
+              RandomForestRegressor(n_estimators = 107, min_samples_split = 0.126663933),
+              RandomForestRegressor(n_estimators = 140, min_samples_split = 0.024252354),
+              GradientBoostingRegressor(n_estimators = 178, min_samples_split = 0.18758125 ),
+              GradientBoostingRegressor(n_estimators = 286, min_samples_split = 0.049154266),
+              GradientBoostingRegressor(n_estimators = 167, min_samples_split = 0.193593156),
+              GradientBoostingRegressor(n_estimators = 255, min_samples_split = 0.138509697),
+              GradientBoostingRegressor(n_estimators = 286, min_samples_split = 0.049154266)
               ]
     ET_models = [
               # extra trees optimized results
-              ExtraTreesRegressor(n_estimators=156,min_samples_split= 0.019714639),
-              ExtraTreesRegressor(n_estimators=222,min_samples_split= 0.035699904),
-              ExtraTreesRegressor(n_estimators=190,min_samples_split= 0.030056095),
-              ExtraTreesRegressor(n_estimators=185,min_samples_split= 0.045897622),
-              ExtraTreesRegressor(n_estimators=196,min_samples_split= 0.045608048)
+              ExtraTreesRegressor(n_estimators=250, min_samples_split= 0.163734361),
+              ExtraTreesRegressor(n_estimators=224, min_samples_split= 0.143697764),
+              ExtraTreesRegressor(n_estimators=224, min_samples_split= 0.143697764),
+              ExtraTreesRegressor(n_estimators=241, min_samples_split= 0.10346333 ),
+              ExtraTreesRegressor(n_estimators=224, min_samples_split= 0.143697764),
               ]
     GPR_models = [
               # gaussian process rbf optimized results
-              GaussianProcessRegressor(kernel=RBF(length_scale=0.447252671)),
-              GaussianProcessRegressor(kernel=RBF(length_scale=0.306832283)),
-              GaussianProcessRegressor(kernel=RBF(length_scale=0.520155268)),
-              GaussianProcessRegressor(kernel=RBF(length_scale=0.40049491 )),
-              GaussianProcessRegressor(kernel=RBF(length_scale=0.23559449 )),
-              # gaussian process exponent RBF optimized results
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale=2.465925836),exponent= 0.14236584 )),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale=2.959935296),exponent= 0.633184869)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale=1.899952629),exponent= 0.4158796  )),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale=1.562362149),exponent= 0.000437716)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale=2.690424842),exponent= 0.048784101)),
-              # gaussian process Matern optimized results
-              GaussianProcessRegressor(kernel=Matern(length_scale=2.47546706 , nu=0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale=2.499202446, nu=0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale=0.756683718, nu=0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale=0.184564262, nu=0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale=1.419087148, nu=0.5)),
-              # gaussian process exponent matern optimized results
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=Matern(length_scale=1.642846586, nu=  2.5), exponent= 0.045173348)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=Matern(length_scale=1.759690269, nu=  0.5), exponent= 0.791462251)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=Matern(length_scale=2.775669376, nu=  2.5), exponent= 0.150181421)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=Matern(length_scale=1.532264143, nu=  1.5), exponent= 0.00424492 )),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=Matern(length_scale=2.596574244, nu=  2.5), exponent= 0.096720357))
+              GaussianProcessRegressor(kernel = RBF(length_scale = 2.535937332)),
+              GaussianProcessRegressor(kernel = RBF(length_scale = 2.536145069)),
+              GaussianProcessRegressor(kernel = RBF(length_scale = 0.88173322 )),
+              GaussianProcessRegressor(kernel = RBF(length_scale = 1.39160148 )),
+              GaussianProcessRegressor(kernel = RBF(length_scale = 2.536145069)),
+              # Gaussian Process Exponent RBF optimized results
+              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 2.709138934),exponent = 0.245295861)),
+              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 1.510927643),exponent = 0.262880944)),
+              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 1.011911938),exponent = 0.117456255)),
+              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 2.752461192),exponent = 0.823807167)),
+              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 1.510927643),exponent = 0.262880944)),
+              # Gaussian Process Matern optimized results
+              GaussianProcessRegressor(kernel=Matern(length_scale = 2.548434499, nu = 0.5)),
+              GaussianProcessRegressor(kernel=Matern(length_scale = 0.480590624, nu = 0.5)),
+              GaussianProcessRegressor(kernel=Matern(length_scale = 0.480590624, nu = 0.5)),
+              GaussianProcessRegressor(kernel=Matern(length_scale = 0.218565733, nu = 0.5)),
+              GaussianProcessRegressor(kernel=Matern(length_scale = 0.480590624, nu = 0.5)),
+              # Gaussian Process Exponent Matern optimized results
+              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.775323549, nu=  1.5), exponent = 0.246048782)),
+              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.512309459, nu=  2.5), exponent = 0.246429492)),
+              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.512309459, nu=  2.5), exponent = 0.246429492)),
+              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 1.738734569, nu=  2.5), exponent = 0.010661179)),
+              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.512309459, nu=  2.5), exponent = 0.246429492))
               ]
     
     filename = "dataset"
     dataset = pkl.load(open("data/"+filename, "rb"))
 
     X_fields = ["graphene_w","CH","C=OH","OH","NH","B","BCH","hydrogen_bond","polarity"]
-    X = normalize(np.array(dataset[["graphene_w","CH","C=OH","OH","NH","B","BCH","P_T_K","hydrogen_bond","polarity"]]),'l2',axis=0)
+    X = normalize(np.array(dataset[["P_T","graphene_w","CH","C=OH","OH","NH","B","BCH","hydrogen_bond","polarity"]]),'l2',axis=0)
     Y = np.array(dataset[["nano_composite_Tg_(K)"]])
     TEST_SIZE = 0.15
     polymer_names_with_Tg = dataset.iloc[:,[1,6]]
     
     # training rf_gb models
-    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 528)
+    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 42)
     Xtrain = np.array(Xtrain)
     Xtest  = np.array(Xtest)
     Ytrain = np.array(Ytrain).reshape(len(Ytrain),1)
@@ -133,7 +131,7 @@ def Optimized_payan_name_Tg_nano_composite():
     Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,results_R2_test,MAE_results,MAPE_results,MSE_results,model_names,(polymer_names,number_of_train_data),importances_results,X_fields,"RF_GB_Optimized_predictions")
     
     # training et models
-    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 375)
+    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 42)
     Xtrain = np.array(Xtrain)
     Xtest  = np.array(Xtest)
     Ytrain = np.array(Ytrain).reshape(len(Ytrain),1)
@@ -193,7 +191,7 @@ def Optimized_payan_name_Tg_nano_composite():
     print("saving results")
     Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,results_R2_test,MAE_results,MAPE_results,MSE_results,model_names,(polymer_names,number_of_train_data),importances_results,X_fields,"ET_Optimized_predictions")
     
-    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 1746)
+    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 42)
     Xtrain = np.array(Xtrain)
     Xtest  = np.array(Xtest)
     Ytrain = np.array(Ytrain).reshape(len(Ytrain),1)
@@ -334,4 +332,3 @@ def Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,result
 results = []
 
 Optimized_payan_name_Tg_nano_composite()
-
