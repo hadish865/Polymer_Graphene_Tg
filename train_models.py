@@ -1,80 +1,79 @@
 import pandas as pd
 import xlsxwriter
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import AdaBoostRegressor,GradientBoostingRegressor,BaggingRegressor,ExtraTreesRegressor,RandomForestRegressor 
+from sklearn.ensemble import GradientBoostingRegressor ,ExtraTreesRegressor,RandomForestRegressor 
 from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import RBF, Matern, WhiteKernel, Exponentiation, Product, Sum
+from sklearn.gaussian_process.kernels import RBF, Matern, Exponentiation
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import normalize
+from sklearn.preprocessing import StandardScaler
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, mean_squared_error
 import numpy as np
 import pickle as pkl
 
-def Optimized_payan_name_Tg_nano_composite():
-    RF_GB_models = [
-              RandomForestRegressor(n_estimators = 217, min_samples_split = 0.093840625),
-              RandomForestRegressor(n_estimators = 272, min_samples_split = 0.031227635),
-              RandomForestRegressor(n_estimators = 350, min_samples_split = 0.039243403),
-              RandomForestRegressor(n_estimators = 107, min_samples_split = 0.126663933),
-              RandomForestRegressor(n_estimators = 140, min_samples_split = 0.024252354),
-              GradientBoostingRegressor(n_estimators = 178, min_samples_split = 0.18758125 ),
-              GradientBoostingRegressor(n_estimators = 286, min_samples_split = 0.049154266),
-              GradientBoostingRegressor(n_estimators = 167, min_samples_split = 0.193593156),
-              GradientBoostingRegressor(n_estimators = 255, min_samples_split = 0.138509697),
-              GradientBoostingRegressor(n_estimators = 286, min_samples_split = 0.049154266)
-              ]
-    ET_models = [
-              # extra trees optimized results
-              ExtraTreesRegressor(n_estimators=250, min_samples_split= 0.163734361),
-              ExtraTreesRegressor(n_estimators=224, min_samples_split= 0.143697764),
-              ExtraTreesRegressor(n_estimators=224, min_samples_split= 0.143697764),
-              ExtraTreesRegressor(n_estimators=241, min_samples_split= 0.10346333 ),
-              ExtraTreesRegressor(n_estimators=224, min_samples_split= 0.143697764),
-              ]
-    GPR_models = [
-              # gaussian process rbf optimized results
-              GaussianProcessRegressor(kernel = RBF(length_scale = 2.535937332)),
-              GaussianProcessRegressor(kernel = RBF(length_scale = 2.536145069)),
-              GaussianProcessRegressor(kernel = RBF(length_scale = 0.88173322 )),
-              GaussianProcessRegressor(kernel = RBF(length_scale = 1.39160148 )),
-              GaussianProcessRegressor(kernel = RBF(length_scale = 2.536145069)),
-              # Gaussian Process Exponent RBF optimized results
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 2.709138934),exponent = 0.245295861)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 1.510927643),exponent = 0.262880944)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 1.011911938),exponent = 0.117456255)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 2.752461192),exponent = 0.823807167)),
-              GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 1.510927643),exponent = 0.262880944)),
-              # Gaussian Process Matern optimized results
-              GaussianProcessRegressor(kernel=Matern(length_scale = 2.548434499, nu = 0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale = 0.480590624, nu = 0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale = 0.480590624, nu = 0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale = 0.218565733, nu = 0.5)),
-              GaussianProcessRegressor(kernel=Matern(length_scale = 0.480590624, nu = 0.5)),
-              # Gaussian Process Exponent Matern optimized results
-              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.775323549, nu=  1.5), exponent = 0.246048782)),
-              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.512309459, nu=  2.5), exponent = 0.246429492)),
-              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.512309459, nu=  2.5), exponent = 0.246429492)),
-              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 1.738734569, nu=  2.5), exponent = 0.010661179)),
-              GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 2.512309459, nu=  2.5), exponent = 0.246429492))
-              ]
+def Optimized_Tg_nano_composite():
+    models = [
+            # Extra Trees optimized results
+            ExtraTreesRegressor(n_estimators = 272, min_samples_split = 0.089794412),
+            ExtraTreesRegressor(n_estimators = 172, min_samples_split = 0.134436839),
+            ExtraTreesRegressor(n_estimators = 224, min_samples_split = 0.143697764),
+            ExtraTreesRegressor(n_estimators = 153, min_samples_split = 0.075041656),
+            ExtraTreesRegressor(n_estimators = 172, min_samples_split = 0.134436839),
+            # Random Forest
+            RandomForestRegressor(n_estimators = 335 , min_samples_split = 0.06259375 ),
+            RandomForestRegressor(n_estimators = 334 , min_samples_split = 0.089794412),
+            RandomForestRegressor(n_estimators = 100 , min_samples_split = 0.065090554),
+            RandomForestRegressor(n_estimators = 311 , min_samples_split = 0.057541194),
+            RandomForestRegressor(n_estimators = 334 , min_samples_split = 0.089794412),
+            # Gradient Boosting optimized results
+            GradientBoostingRegressor(n_estimators = 178, min_samples_split = 0.693385724),
+            GradientBoostingRegressor(n_estimators = 193, min_samples_split = 0.705201292),
+            GradientBoostingRegressor(n_estimators = 193, min_samples_split = 0.705201292),
+            GradientBoostingRegressor(n_estimators = 186, min_samples_split = 0.69798037 ),
+            GradientBoostingRegressor(n_estimators = 193, min_samples_split = 0.705201292),
+            # Gaussian Process RBF optimized results
+            GaussianProcessRegressor(kernel = RBF(length_scale = 1.617183123), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = RBF(length_scale = 8.45381705 ), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = RBF(length_scale = 2.939111441), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = RBF(length_scale = 0.012734077), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = RBF(length_scale = 8.45381705 ), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            #Gaussian Process Exponent RBF optimized results
+            GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 0.504308474),exponent = 0.093200173), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 3.926932014),exponent = 0.051818176), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 3.373040455),exponent = 0.070473753), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 5.827752653),exponent = 2.979309401), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Exponentiation(kernel=RBF(length_scale = 3.926932014),exponent = 0.051818176), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            # Gaussian Process Matern optimized results
+            GaussianProcessRegressor(kernel=Matern(length_scale = 1.127365022, nu = 0.5), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Matern(length_scale = 0.192552148, nu = 0.5), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Matern(length_scale = 4.570861238, nu = 0.5), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Matern(length_scale = 4.638781749, nu = 0.5), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel=Matern(length_scale = 0.192552148, nu = 0.5), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            # Gaussian Process Exponent Matern optimized results
+            GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 1.545304196, nu = 0.5), exponent = 1.346181932), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 0.592311091, nu = 0.5), exponent = 1.470672505), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 0.247757204, nu = 0.5), exponent = 1.033802531), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 1.132346208, nu = 0.5), exponent = 1.428879482), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5),
+            GaussianProcessRegressor(kernel = Exponentiation(kernel = Matern(length_scale = 0.592311091, nu = 0.5), exponent = 1.470672505), normalize_y = True, alpha=1e-4, random_state = 42,  n_restarts_optimizer=5)
+        ]
     
     filename = "dataset"
-    dataset = pkl.load(open("data/"+filename, "rb"))
+    dataset = pkl.load(open("data/"+filename+".rb", "rb"))
 
     X_fields = ["graphene_w","CH","C=OH","OH","NH","B","BCH","hydrogen_bond","polarity"]
-    X = normalize(np.array(dataset[["P_T","graphene_w","CH","C=OH","OH","NH","B","BCH","hydrogen_bond","polarity"]]),'l2',axis=0)
-    Y = np.array(dataset[["nano_composite_Tg_(K)"]])
+    Y_field = ["nano_composite_Tg_(K)"]
+    X = dataset.iloc[:,[4,9,11,15,17,19,21,35,36,37]]
+    Y = dataset.iloc[:,5]
     TEST_SIZE = 0.15
-    polymer_names_with_Tg = dataset.iloc[:,[1,6]]
+    polymer_names_with_Tg = dataset.iloc[:,[0,5]]
     
-    # training rf_gb models
+    # training models
     Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 42)
-    Xtrain = np.array(Xtrain)
-    Xtest  = np.array(Xtest)
+    scaler = StandardScaler()
+    Xtrain = scaler.fit_transform(Xtrain)
+    Xtest  = scaler.transform(Xtest)
     Ytrain = np.array(Ytrain).reshape(len(Ytrain),1)
     Ytest  = np.array(Ytest).reshape(len(Ytest),1)
-    model_names = [str(name).split("()")[0] for name in RF_GB_models]
+    model_names = [str(name).split("()")[0] for name in models]
     number_of_features = X.shape[1]
     number_of_models = len(model_names)
     polymer_names = ["" for _ in range(dataset.shape[0])]
@@ -101,7 +100,7 @@ def Optimized_payan_name_Tg_nano_composite():
     MSE_results = np.zeros((1,number_of_models))
     number_of_train_data = Ytrain.shape[0]
     
-    for index, regressor in enumerate(RF_GB_models):    
+    for index, regressor in enumerate(models):    
         regressor.fit(Xtrain,Ytrain.ravel())
         predict_train = regressor.predict(Xtrain)
         predict_test = regressor.predict(Xtest)
@@ -128,128 +127,8 @@ def Optimized_payan_name_Tg_nano_composite():
         importances_results[:,index] = importances["importances_mean"]
         print(str(regressor).split("()")[0]+" complete.")
     print("saving results")
-    Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,results_R2_test,MAE_results,MAPE_results,MSE_results,model_names,(polymer_names,number_of_train_data),importances_results,X_fields,"RF_GB_Optimized_predictions")
+    Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,results_R2_test,MAE_results,MAPE_results,MSE_results,model_names,(polymer_names,number_of_train_data),importances_results,X_fields,"Optimized_predictions")
     
-    # training et models
-    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 42)
-    Xtrain = np.array(Xtrain)
-    Xtest  = np.array(Xtest)
-    Ytrain = np.array(Ytrain).reshape(len(Ytrain),1)
-    Ytest  = np.array(Ytest).reshape(len(Ytest),1)
-    model_names = [str(name).split("()")[0] for name in ET_models]
-    number_of_features = X.shape[1]
-    number_of_models = len(model_names)
-    all_Y_real = np.concatenate((Ytrain,Ytest),axis=0) # for calculating MAE, MAPE and MSE
-    index = 0
-    for Tg in all_Y_real.flatten():
-        # find the index of the polymer with the matching Tg value
-        Tg_index = polymer_names_with_Tg[polymer_names_with_Tg["nano_composite_Tg_(K)"] == Tg].index
-        if not Tg_index.empty:  # check if any index was found
-            polymer_names[index] = polymer_names_with_Tg.iloc[Tg_index[0]]["polymer_name"]
-            index += 1
-        else:
-            print("could not find this Tg",Tg)
-
-    len_Xtest  = Xtest.shape[0]
-    len_Xtrain = Xtrain.shape[0]
-    results_train = np.zeros((len_Xtrain,number_of_models))
-    results_test = np.zeros((len_Xtest,number_of_models))
-    results_R2_train = np.zeros((1,number_of_models))
-    results_R2_test = np.zeros((1,number_of_models))
-    importances_results = np.zeros((number_of_features,number_of_models))
-    MAE_results = np.zeros((1,number_of_models))
-    MAPE_results = np.zeros((1,number_of_models))
-    MSE_results = np.zeros((1,number_of_models))
-    number_of_train_data = Ytrain.shape[0]
-    
-    for index, regressor in enumerate(ET_models):    
-        regressor.fit(Xtrain,Ytrain.ravel())
-        predict_train = regressor.predict(Xtrain)
-        predict_test = regressor.predict(Xtest)
-        all_Y_pred = np.concatenate((predict_train,predict_test))
-        MAE_results[0,index] = mean_absolute_error(all_Y_real,all_Y_pred)
-        MAPE_results[0,index] = mean_absolute_percentage_error(all_Y_real,all_Y_pred)
-        MSE_results[0,index] = mean_squared_error(all_Y_real,all_Y_pred)
-        results_train[:,index] = regressor.predict(Xtrain) 
-        results_test[:,index] = regressor.predict(Xtest) 
-        r2_train = regressor.score(Xtrain,Ytrain)
-        r2_test  = regressor.score(Xtest,Ytest)
-        if (r2_train < 0):
-            r2_train = np.abs(r2_train)
-        if (r2_test < 0):
-            r2_test = np.abs(r2_test)
-        if (r2_train > 1):
-            r2_train = 1/r2_train
-        if (r2_test > 1):
-            r2_test = 1/r2_test
-
-        results_R2_train[0,index] = r2_train
-        results_R2_test[0,index]  = r2_test 
-        importances = permutation_importance(regressor,Xtrain,Ytrain)
-        importances_results[:,index] = importances["importances_mean"]
-        print(str(regressor).split("()")[0]+" complete.")
-    print("saving results")
-    Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,results_R2_test,MAE_results,MAPE_results,MSE_results,model_names,(polymer_names,number_of_train_data),importances_results,X_fields,"ET_Optimized_predictions")
-    
-    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=TEST_SIZE, random_state = 42)
-    Xtrain = np.array(Xtrain)
-    Xtest  = np.array(Xtest)
-    Ytrain = np.array(Ytrain).reshape(len(Ytrain),1)
-    Ytest  = np.array(Ytest).reshape(len(Ytest),1)
-    model_names = [str(name).split("()")[0] for name in GPR_models]
-    number_of_features = X.shape[1]
-    number_of_models = len(model_names)
-    all_Y_real = np.concatenate((Ytrain,Ytest),axis=0) # for calculating MAE, MAPE and MSE
-    index = 0
-    for Tg in all_Y_real.flatten():
-        # find the index of the polymer with the matching Tg value
-        Tg_index = polymer_names_with_Tg[polymer_names_with_Tg["nano_composite_Tg_(K)"] == Tg].index
-        if not Tg_index.empty:  # check if any index was found
-            polymer_names[index] = polymer_names_with_Tg.iloc[Tg_index[0]]["polymer_name"]
-            index += 1
-        else:
-            print("could not find this Tg",Tg)
-
-    len_Xtest  = Xtest.shape[0]
-    len_Xtrain = Xtrain.shape[0]
-    results_train = np.zeros((len_Xtrain,number_of_models))
-    results_test = np.zeros((len_Xtest,number_of_models))
-    results_R2_train = np.zeros((1,number_of_models))
-    results_R2_test = np.zeros((1,number_of_models))
-    importances_results = np.zeros((number_of_features,number_of_models))
-    MAE_results = np.zeros((1,number_of_models))
-    MAPE_results = np.zeros((1,number_of_models))
-    MSE_results = np.zeros((1,number_of_models))
-    number_of_train_data = Ytrain.shape[0]
-    
-    for index, regressor in enumerate(GPR_models):    
-        regressor.fit(Xtrain,Ytrain.ravel())
-        predict_train = regressor.predict(Xtrain)
-        predict_test = regressor.predict(Xtest)
-        all_Y_pred = np.concatenate((predict_train,predict_test))
-        MAE_results[0,index] = mean_absolute_error(all_Y_real,all_Y_pred)
-        MAPE_results[0,index] = mean_absolute_percentage_error(all_Y_real,all_Y_pred)
-        MSE_results[0,index] = mean_squared_error(all_Y_real,all_Y_pred)
-        results_train[:,index] = regressor.predict(Xtrain) 
-        results_test[:,index] = regressor.predict(Xtest) 
-        r2_train = regressor.score(Xtrain,Ytrain)
-        r2_test  = regressor.score(Xtest,Ytest)
-        if (r2_train < 0):
-            r2_train = np.abs(r2_train)
-        if (r2_test < 0):
-            r2_test = np.abs(r2_test)
-        if (r2_train > 1):
-            r2_train = 1/r2_train
-        if (r2_test > 1):
-            r2_test = 1/r2_test
-        results_R2_train[0,index] = r2_train
-        results_R2_test[0,index]  = r2_test 
-        importances = permutation_importance(regressor,Xtrain,Ytrain)
-        importances_results[:,index] = importances["importances_mean"]
-        print(str(regressor).split("()")[0]+" complete.")
-    print("saving results")
-    Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,results_R2_test,MAE_results,MAPE_results,MSE_results,model_names,(polymer_names,number_of_train_data),importances_results,X_fields,"GPR_Optimized_predictions")
-
 def Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,results_R2_test,MAE_results,MAPE_results,MSE_results,model_names,polymer_names_info,importances_result,descriptor_names,filename="results"):
     polymer_names, number_of_train_data = polymer_names_info
     workbook = xlsxwriter.Workbook("results/"+filename+".xlsx")
@@ -331,4 +210,4 @@ def Save_results(Ytrain,results_train,Ytest,results_test,results_R2_train,result
 
 results = []
 
-Optimized_payan_name_Tg_nano_composite()
+Optimized_Tg_nano_composite()
